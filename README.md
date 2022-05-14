@@ -1,2 +1,2 @@
-# Github-Searcher
-GitHub Repository and User Api Seacher 
+# GitHub Searcher ( React Native )
+ GitHub Repository Api And UserName Api Searcher 
