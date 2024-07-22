@@ -1,15 +1,21 @@
 import React, {useState} from 'react';
-import {StyleSheet, ImageBackground, SafeAreaView} from 'react-native';
+import {
+  StyleSheet,
+  ImageBackground,
+  SafeAreaView,
+  ActivityIndicator,
+} from 'react-native';
 import Toast from 'react-native-simple-toast';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import Header from '../components/Header';
 import RepositoryList from '../components/RepositoryList';
 import UserList from '../components/UserList';
 import {fetchUserName, fetchRepositories} from '../services/api';
+import Loading from '../components/Loading';
 
 const HomeScreen: React.FC = () => {
   const [userInput, setUserInput] = useState<string>('');
-  const [_, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [dataUserName, setDataUserName] = useState([]);
   const [dataRepositories, setRepositories] = useState([]);
   const image = {
@@ -51,6 +57,9 @@ const HomeScreen: React.FC = () => {
     first: FirstRoute,
     second: SecondRoute,
   });
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -77,6 +86,7 @@ const HomeScreen: React.FC = () => {
           renderTabBar={props => <TabBar {...props} />}
         />
       </ImageBackground>
+      <Loading visible={loading} />
     </SafeAreaView>
   );
 };
